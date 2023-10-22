@@ -1,4 +1,4 @@
-import { Component } from "react/cjs/react.development";
+import { useState } from "react/cjs/react.development";
 
 import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
@@ -6,38 +6,33 @@ import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
 import decoration from '../../resources/img/vision.png';
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
+import ComicsList from "../comicsList/ComicsList";
 
-
-class App extends Component {
+const App = () => {
     
-    state = {
-        selectedChar: null
-    }
-
-    onCharSelected = (id) => {
-        this.setState({
-            selectedChar: id
-        })
-    }
+    const [selectedChar, setChar] = useState(null);
 
 
-    render() {
-        return (
-            <div className="app">
-                <AppHeader/>
-                <main>
-                    <RandomChar/>
-                    <div className="char__content">
-                        <CharList onCharSelected={this.onCharSelected}/>
-                        <ErrorBoundary>
-                            <CharInfo charId={this.state.selectedChar}/>    
-                        </ErrorBoundary>
-                    </div>
-                    <img className="bg-decoration" src={decoration} alt="vision"/>
-                </main>
-            </div>
-        )
+    const onCharSelected = (id) => {
+        setChar(id);
     }
+
+    return (
+        <div className="app">
+            <AppHeader/>
+            <main>
+                {/* <RandomChar/>
+                <div className="char__content">
+                    <CharList onCharSelected={onCharSelected}/>
+                    <ErrorBoundary>
+                        <CharInfo charId={selectedChar}/>    
+                    </ErrorBoundary>
+                </div>
+                <img className="bg-decoration" src={decoration} alt="vision"/> */}
+                <ComicsList/>
+            </main>
+        </div>
+    )
 }
 
 export default App;
